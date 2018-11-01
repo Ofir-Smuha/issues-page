@@ -3,17 +3,20 @@ import { connect } from 'react-redux';
 
 import { fetchIssues } from "actions/issuesActions";
 
-class IssuesPage extends Component<{}> {
+type Props = {
+  fetchIssues: () => void,
+  openIssues: {}[]
+}
+
+class IssuesPage extends Component<Props> {
 
   componentDidMount(){
-    console.log('mounted')
     this.props.fetchIssues()
   }
 
   render() {
     return (
       <div>
-        {this.props.openIssues.map(issue => <h1>{issue.body}</h1>)}
       </div>
     );
   }
