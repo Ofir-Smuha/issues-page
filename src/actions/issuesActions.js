@@ -13,8 +13,9 @@ export const  fetchIssues = () => ({
   }
 });
 
-export const setIssues = () => ({
-  type: AT.SET_ISSUES
+export const setIssues = (openIssues) => ({
+  type: AT.SET_ISSUES,
+  openIssues
 });
 
 export const setError = () => ({

@@ -13,16 +13,16 @@ class IssuesPage extends Component<{}> {
   render() {
     return (
       <div>
-        <h1>1</h1>
+        {this.props.openIssues.map(issue => <h1>{issue.body}</h1>)}
       </div>
     );
   }
 }
 
-// const mapStateToProps = (state) => ({
-//
-// })
+const mapStateToProps = ({issues}) => ({
+  openIssues: issues.openIssues
+})
 
-export default connect(null, {
+export default connect(mapStateToProps, {
   fetchIssues
 })(IssuesPage);
