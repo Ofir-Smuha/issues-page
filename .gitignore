@@ -11,6 +11,16 @@
 # production
 /build
 
+# flow
+.flowconfig
+flow-typed/
+
+# webstorm
+.idea
+
+# JSON
+package-lock.json
+
 # misc
 .DS_Store
 .env.local
