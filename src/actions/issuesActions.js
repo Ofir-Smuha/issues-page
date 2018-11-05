@@ -1,7 +1,12 @@
-import * as AT from 'actions/types'
+// @flow
+import type { OpenIssues } from 'types/api.types';
 
-export const  fetchIssues = () => ({
-  type: AT.FETCH_ISSUES,
+export const FETCH_ISSUES = 'FETCH_ISSUES';
+export const SET_ISSUES = 'SET_ISSUES';
+export const SET_ERROR = 'SET_ERROR';
+
+export const fetchIssues = () => ({
+  type: FETCH_ISSUES,
   payload: {
     onSuccess: setIssues,
     onError: setError
@@ -13,11 +18,17 @@ export const  fetchIssues = () => ({
   }
 });
 
-export const setIssues = (openIssues) => ({
-  type: AT.SET_ISSUES,
-  openIssues
+type Action = {
+  type: string
+};
+
+export const setIssues = (openIssues: OpenIssues) => ({
+  type: SET_ISSUES,
+  payload: {
+    openIssues
+  }
 });
 
-export const setError = () => ({
-  type: AT.SET_ERROR
+export const setError = (): Action => ({
+  type: SET_ERROR
 });

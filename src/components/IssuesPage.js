@@ -1,27 +1,30 @@
-import React, {Component} from 'react';
+// @flow
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchIssues } from "actions/issuesActions";
+import type { OpenIssues } from "types/api.types";
 
-class IssuesPage extends Component<{}> {
+import { fetchIssues } from 'actions/issuesActions';
 
-  componentDidMount(){
-    this.props.fetchIssues()
+
+type ConnectedProps = {
+  fetchIssues: () => void,
+  openIssues: OpenIssues
+};
+
+class IssuesPage extends Component<ConnectedProps> {
+
+  componentDidMount() {
+    this.props.fetchIssues();
   }
 
   render() {
-    return (
-      <div>
-        {this.props.openIssues.map(issue => <h1>{issue.body}</h1>)}
-      </div>
-    );
+    return <div/>;
   }
 }
 
-const mapStateToProps = ({issues}) => ({
+const mapStateToProps = ({ issues }) => ({
   openIssues: issues.openIssues
-})
+});
 
-export default connect(mapStateToProps, {
-  fetchIssues
-})(IssuesPage);
+export default connect(mapStateToProps, { fetchIssues })(IssuesPage);
