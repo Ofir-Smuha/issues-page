@@ -1,13 +1,16 @@
+// @flow
 import { createStore, compose, applyMiddleware} from 'redux';
+
+import type { Store } from 'redux';
 
 import rootReducer from 'reducers/rootReducer';
 import apiMiddleware from 'middlewares/apiMiddleware'
 
 const initialState = {};
 
-const middleware = [apiMiddleware]
+const middleware = [apiMiddleware];
 
-const store = createStore(
+const store: Store = createStore(
   rootReducer,
   initialState,
   compose(

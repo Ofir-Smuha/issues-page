@@ -1,11 +1,12 @@
+// @flow
 import axios from 'axios';
 import { get } from 'lodash/fp';
 
-const dispatchActions  = (dispatch, arr, data) => {
-  arr.forEach(action => dispatch(action(data)))
+const dispatchActions = (dispatch, arr, data) => {
+  arr.forEach(action => dispatch(action(data)));
 };
 
-const apiMiddleware = ({dispatch}) => next => action => {
+const apiMiddleware = ({ dispatch }) => next => action => {
   if (get('meta.type', action) !== 'api') {
     return next(action);
   }
@@ -13,20 +14,21 @@ const apiMiddleware = ({dispatch}) => next => action => {
   const { url, method = 'get' } = action.meta;
   const { onSuccess, onError } = action.payload;
 
-  axios.request({url, method})
-    .then(({data}) => {
-      if(Array.isArray(onSuccess)) {
-        dispatchActions(dispatch, onSuccess, data)
+  axios
+    .request({ url, method })
+    .then(({ data }) => {
+      if (Array.isArray(onSuccess)) {
+        dispatchActions(dispatch, onSuccess, data);
       } else {
-        dispatch(onSuccess(data))
+        dispatch(onSuccess(data));
       }
     })
-    .catch( err => {
-      if(Array.isArray(onError)) {
-        dispatchActions(dispatch, onError, err)
+    .catch(err => {
+      if (Array.isArray(onError)) {
+        dispatchActions(dispatch, onError, err);
       } else {
-        dispatch(onError())
-      };
+        dispatch(onError());
+      }
     });
 };
 
