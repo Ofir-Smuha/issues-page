@@ -12,8 +12,10 @@ const initialState: IssuesState = {
   openIssues: []
 };
 
-export default handleActions<IssuesState, Object>({
-  SET_ISSUES: (state, { payload }): IssuesState => set('openIssues', payload.openIssues, state)
+export default handleActions<IssuesState, Object>(
+  {
+    SET_ISSUES: (state, { payload }): IssuesState =>
+      set('openIssues', payload.openIssues, state)
   },
   initialState
 );
