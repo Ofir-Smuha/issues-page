@@ -6,7 +6,6 @@ import { fetchIssues } from "actions/issuesActions";
 class IssuesPage extends Component<{}> {
 
   componentDidMount(){
-    console.log('mounted')
     this.props.fetchIssues()
   }
 
