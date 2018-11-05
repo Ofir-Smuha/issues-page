@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components';
 import moment from 'moment';
 import { get } from 'lodash/fp';
@@ -71,17 +72,18 @@ const Comments = styled.div`
 //   openIssue: OpenIssue
 // };
 
-const IssuePreview = ({ openIssue } : {openIssue: OpenIssue}) => {
+const IssuePreview = (props) => {
 
-  const userName = get('user.login', openIssue);
-  const { number: issueSerial, created_at: openedAt ,comments, title} = openIssue;
+  console.log(props)
+  const userName = get('user.login', props.openIssue);
+  const { number: issueSerial, created_at: openedAt ,comments, title, id} = props.openIssue;
 
   return (
     <OpenIssueContainer>
       <IconDescriptionContainer>
         <AlertIcon/>
         <IssueDescription>
-          <IssueTitle>{title}</IssueTitle>
+          <IssueTitle onClick={() => props.history.push(`/issues/${id}`)}>{title}</IssueTitle>
           <OpendAt>#{issueSerial} opened {moment(openedAt).fromNow()} by {userName}</OpendAt>
         </IssueDescription>
       </IconDescriptionContainer>
@@ -93,4 +95,4 @@ const IssuePreview = ({ openIssue } : {openIssue: OpenIssue}) => {
   );
 };
 
-export default IssuePreview;
+export default withRouter(IssuePreview);
